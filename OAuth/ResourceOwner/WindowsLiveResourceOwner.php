@@ -35,6 +35,9 @@ class WindowsLiveResourceOwner extends GenericOAuth2ResourceOwner
      */
     protected function httpRequest($url, $content = null, array $headers = [], $method = null)
     {
+        if ($url != 'https://apis.live.net/v5.0/me') {
+            $headers += array('Content-Type' => 'application/x-www-form-urlencoded');
+        }
         // Skip the Content-Type header in GenericOAuth2ResourceOwner::httpRequest
         return AbstractResourceOwner::httpRequest($url, $content, $headers, $method);
     }
